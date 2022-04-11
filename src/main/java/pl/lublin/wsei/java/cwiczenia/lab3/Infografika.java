@@ -49,4 +49,13 @@ public class Infografika {
             wysokosc = 0;
         }
     }
+
+    public void print() {
+        System.out.println("Infografika:");
+        System.out.println("\ttytul: " + tytul);
+        System.out.println("\tadres strony: " + adresStrony);
+        System.out.println("\tadres grafiki: " + adresGrafiki);
+        System.out.println("\tadres miniaturki: " + adresMiniaturki);
+        System.out.println("\trozmiary: " + szerokosc + "x" + wysokosc + "\n");
+    }
 }
