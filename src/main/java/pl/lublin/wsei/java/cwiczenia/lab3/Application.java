@@ -16,7 +16,7 @@ public class Application extends javafx.application.Application {
         controller.setHostServices(this.getHostServices());
         controller.setStage(stage);
 
-        stage.setTitle("Hello!");
+        stage.setTitle("Infografiki");
         stage.setScene(new Scene(root, 800, 700));
         stage.show();
     }
