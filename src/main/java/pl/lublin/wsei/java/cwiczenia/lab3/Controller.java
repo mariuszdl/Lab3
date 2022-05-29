@@ -1,5 +1,6 @@
 package pl.lublin.wsei.java.cwiczenia.lab3;
 
+import javafx.application.HostServices;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -22,6 +24,17 @@ public class Controller {
     public Button btnPokazInfografike;
     public TextField txtAdresStrony;
     public Button btnPrzejdzDoStrony;
+    private Infografika selInfografika;
+    private Stage stage;
+    private HostServices hostServices;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
+    }
 
     FileChooser fileChooser = new FileChooser();
     FileChooser.ExtensionFilter xmlFilter = new FileChooser.ExtensionFilter("Pliki XML (*.xml)", "*.xml");
@@ -38,16 +51,24 @@ public class Controller {
             public void changed(ObservableValue<? extends Number> observableValue, Number old_val, Number new_val) {
                 int index = new_val.intValue();
                 if(index != -1) {
-                    txtAdresStrony.setText(igList.infografiki.get(index).adresStrony);
+                    selInfografika = igList.infografiki.get(index);
+                    txtAdresStrony.setText(selInfografika.adresStrony);
 
-                    Image image = new Image(igList.infografiki.get(index).adresMiniaturki);
+                    Image image = new Image(selInfografika.adresMiniaturki);
                     imgMiniaturka.setImage(image);
                 } else {
                     txtAdresStrony.setText("");
                     imgMiniaturka.setImage(null);
+                    selInfografika = null;
                 }
             }
         });
+    }
+
+    public void btnZaladujStrone(ActionEvent actionEvent) {
+        if (selInfografika != null) {
+            hostServices.showDocument(selInfografika.adresStrony);
+        }
     }
 
     public void btnOpenFileAction(ActionEvent actionEvent) {
